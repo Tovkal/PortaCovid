@@ -1,0 +1,8 @@
+#include "Base.xcconfig"
+
+CODE_SIGN_IDENTITY=iPhone Developer
+DISPLAY_NAME=PortaCovid Beta
+CUSTOM_BUNDLE_ID=com.andrespizabuckmann.PortaCovid.debug
+PROVISIONING_PROFILE_SPECIFIER=match Development com.andrespizabuckmann.PortaCovid.debug
+SWIFT_COMPILATION_MODE = singlefile;
+SWIFT_OPTIMIZATION_LEVEL = -Onone;

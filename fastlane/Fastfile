@@ -1,0 +1,101 @@
+default_platform(:ios)
+
+desc "Description of what the lane does"
+lane :test do
+    tests_passed = scan(
+                        project: "Makeup.xcodeproj",
+                        devices: ["iPhone 12"], 
+                        scheme: "Makeup",
+                        fail_build: false
+                    )
+
+    if not tests_passed
+        derived_data_path = lane_context[SharedValues::SCAN_DERIVED_DATA_PATH]
+        archive_xcresults(derived_data_path: derived_data_path)
+        UI.user_error!("Tests failed and archived xcresults")
+    end
+end
+
+desc "Upload build to TestFlight"
+lane :beta do |options|
+    ensure_git_status_clean
+    bump_type = options[:bump_type]
+    if bump_type.nil?
+        bump_type = prompt(text: "Want to increment the version number?\nType: patch, minor, major, none")
+    end
+    if ["patch", "minor", "major"].include? bump_type
+        increment_version_number_in_plist(
+            bump_type: bump_type,
+            scheme: "Makeup"
+        )
+    end
+    increment_build_number_in_plist(scheme: "Makeup")
+
+    test
+    commit_tag_version_bump
+    build_app(scheme: "Makeup")
+    upload_to_testflight(username: "tovkal@gmail.com", skip_waiting_for_build_processing: true)
+end
+
+lane :screenshots do
+    capture_screenshots
+    frameit(path: "./fastlane/screenshots")
+end
+
+desc "Upload text metadata and screenshots"
+lane :upload_all_metadata do
+    sh("rm -rf storeScreenshots")
+    sh("mkdir storeScreenshots")
+    sh('rsync -av --filter="+ */" --filter="-! *framed*" screenshots/ storeScreenshots/')
+    sh("mv storeScreenshots/ca-ES storeScreenshots/ca")
+    upload_to_app_store(
+        skip_binary_upload: true,
+        overwrite_screenshots: true,
+        screenshots_path: "./fastlane/storeScreenshots"
+    )
+end
+
+desc "Upload only text metadata"
+lane :upload_text_metadata do
+   upload_to_app_store(
+        skip_screenshots: true,
+        skip_binary_upload: true
+    )
+end
+
+lane :commit_tag_version_bump do
+    version = get_version_number_from_plist(scheme: "Makeup")
+    build = get_build_number_from_plist(scheme: "Makeup")
+    git_commit(path: ["Sources/Info.plist"], message: "Version Bump #{version}(#{build})")
+    add_git_tag(
+        tag: "#{version}",
+        force: true
+    )
+end
+
+lane :translate do
+     Dir.chdir ".." do
+        sh("bartycrouch update")
+        sh("swiftgen config run")
+     end
+end
+
+# Private lanes
+
+private_lane :archive_xcresults do |options|
+    test_logs_folder_path = "#{options[:derived_data_path]}/Logs/Test"
+
+    if File.exist?(test_logs_folder_path)
+        project_dir = File.expand_path("..", Dir.pwd)
+        test_results_folder = "#{project_dir}/testresults"
+        Dir.mkdir(test_results_folder)
+        xcresults = Dir["#{test_logs_folder_path}/*.xcresult"]
+        xcresults.each do |xcresult|
+            puts "copying #{xcresult} to #{test_results_folder}"
+            FileUtils.cp_r(xcresult, test_results_folder)
+        end
+
+    else
+        puts "No test logs folder"
+    end
+end

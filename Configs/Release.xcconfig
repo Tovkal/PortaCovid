@@ -1,0 +1,8 @@
+#include "Base.xcconfig"
+
+CODE_SIGN_IDENTITY=iPhone Distribution
+DISPLAY_NAME=PortaCovid
+CUSTOM_BUNDLE_ID=com.andrespizabuckmann.PortaCovid
+PROVISIONING_PROFILE_SPECIFIER=match AppStore com.andrespizabuckmann.PortaCovid
+SWIFT_COMPILATION_MODE = wholemodule;
+SWIFT_OPTIMIZATION_LEVEL = -Owholemodule;

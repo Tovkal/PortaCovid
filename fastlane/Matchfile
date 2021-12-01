@@ -1,0 +1,7 @@
+git_url("git@github.com:Tovkal/ios-certificates.git")
+
+storage_mode("git")
+
+type("development")
+
+app_identifier(["com.andrespizabuckmann.PortaCovid", "com.andrespizabuckmann.PortaCovid.debug"])
