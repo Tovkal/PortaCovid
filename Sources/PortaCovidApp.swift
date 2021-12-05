@@ -2,7 +2,7 @@
 //  PortaCovidApp.swift
 //  PortaCovid
 //
-//  Created by Andrés Pizá Bückmann on 5/8/21.
+//  Created by Andrés Pizá Bückmann on 1/12/21.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct PortaCovidApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
