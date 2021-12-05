@@ -9,11 +9,13 @@ import SwiftUI
 
 struct HomeView: View {
 
-    private var haveQR = false
+    private var haveQR = true
+    private var qrView = QRView()
     private var noQRView = NoQRView()
 
     var body: some View {
         if haveQR {
+            qrView
         } else {
             noQRView
         }
