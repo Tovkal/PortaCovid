@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import EUDCC
 import EUDCCDecoder
 
 struct NoQRView: View {
     @State private var isShowingScanner = false
+    @Binding var certificate: EUDCC?
 
     var body: some View {
         VStack {
@@ -53,7 +55,7 @@ struct NoQRView: View {
 
         switch decodingResult {
         case .success(let eudcc):
-            print("EU Digital COVID Certificate", eudcc)
+            self.certificate = eudcc
         case .failure(let decodingError):
             print("Failed to decode EUDCC", decodingError)
         }
@@ -62,6 +64,6 @@ struct NoQRView: View {
 
 struct NoQRView_Previews: PreviewProvider {
     static var previews: some View {
-        NoQRView()
+        NoQRView(certificate: Binding.constant(nil))
     }
 }

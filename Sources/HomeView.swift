@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
+import EUDCC
 
 struct HomeView: View {
 
-    private var haveQR = false
-    private var qrView = QRView()
-    private var noQRView = NoQRView()
+    @State var certificate: EUDCC?
 
     var body: some View {
-        if haveQR {
-            qrView
+        if certificate == nil {
+            NoQRView(certificate: $certificate)
         } else {
-            noQRView
+            QRView()
         }
     }
 }
