@@ -15,6 +15,8 @@ let mainTarget = Target(
     sources: ["Sources/**"],
     resources: ["Resources/**"],
     dependencies: [
+        .package(product: "EUDCC"),
+        .package(product: "EUDCCDecoder")
     ],
     settings: Settings.settings(configurations: [
         .debug(name: "Debug", xcconfig: "Configs/Debug.xcconfig"),
@@ -29,6 +31,9 @@ let scheme = Scheme(
 )
 
 let project = Project(name: appName,
+                      packages: [
+                        .remote(url: "https://github.com/SvenTiigi/EUDCCKit.git", requirement: .upToNextMajor(from: "0.0.3"))
+                      ],
                       targets: [mainTarget],
                       schemes: [scheme],
                       additionalFiles: ["Configs/Base.xcconfig"])

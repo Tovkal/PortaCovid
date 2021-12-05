@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "EUDCCKit",
+        "repositoryURL": "https://github.com/SvenTiigi/EUDCCKit.git",
+        "state": {
+          "branch": null,
+          "revision": "73a6e511e4a2a5b144cd66e11fc1bb9974b04adc",
+          "version": "0.0.3"
+        }
+      },
+      {
+        "package": "SwiftCBOR",
+        "repositoryURL": "https://github.com/unrelentingtech/SwiftCBOR.git",
+        "state": {
+          "branch": null,
+          "revision": "668c26fc3373d5f1bccbaad7665ca6048797e324",
+          "version": "0.4.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

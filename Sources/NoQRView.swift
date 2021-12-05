@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EUDCCDecoder
 
 struct NoQRView: View {
     @State private var isShowingScanner = false
@@ -40,9 +41,21 @@ struct NoQRView: View {
 
         switch result {
         case .success(let data):
-            print(data)
+            decodeCertificate(data)
         case .failure(let error):
             print(error)
+        }
+    }
+
+    func decodeCertificate(_ data: String) {
+        let decoder = EUDCCDecoder()
+        let decodingResult = decoder.decode(from: data)
+
+        switch decodingResult {
+        case .success(let eudcc):
+            print("EU Digital COVID Certificate", eudcc)
+        case .failure(let decodingError):
+            print("Failed to decode EUDCC", decodingError)
         }
     }
 }
