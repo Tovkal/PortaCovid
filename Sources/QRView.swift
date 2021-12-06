@@ -23,9 +23,17 @@ struct QRView: View {
 
     var body: some View {
         VStack {
+            Text("COVID CERTIFICATE")
+                .font(.title)
             QRCodeView(data: certificate.base45Representation)
-            Text("\(certificate.name.firstName ?? "") \(certificate.name.lastName ?? "")")
+            Text("\(certificate.name.lastName ?? "")")
                 .font(.title3)
+                .fontWeight(.bold)
+            Text("\(certificate.name.firstName ?? "")")
+                .font(.title3)
+                .fontWeight(.bold)
+            Spacer()
+                .frame(height: 10)
             Text(certificate.dateOfBirth, formatter: dateFormatter)
         }
     }
