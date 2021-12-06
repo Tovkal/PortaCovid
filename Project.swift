@@ -24,11 +24,24 @@ let mainTarget = Target(
     ])
 )
 
+let testTarget = Target(
+    name: "Tests",
+    platform: platform,
+    product: .unitTests,
+    bundleId: "${CUSTOM_BUNDLE_ID}.Tests",
+    infoPlist: .default,
+    sources: ["Tests/**"],
+    dependencies: [
+        .target(name: appName),
+        .xctest
+    ]
+)
+
 let uiTestTarget = Target(
     name: "UITests",
     platform: platform,
     product: .uiTests,
-    bundleId: "${CUSTOM_BUNDLE_ID}",
+    bundleId: "${CUSTOM_BUNDLE_ID}.UITests",
     infoPlist: .default,
     sources: ["UITests/**", "fastlane/SnapshotHelper.swift"],
     dependencies: [
@@ -40,7 +53,9 @@ let uiTestTarget = Target(
 let scheme = Scheme(
     name: appName,
     shared: true,
-    buildAction: BuildAction(targets: [TargetReference(stringLiteral: appName)])
+    buildAction: BuildAction(targets: [TargetReference(stringLiteral: appName)]),
+    testAction: TestAction.targets([TestableTarget("Tests")],
+                                   options: .options(language: "en", region: "US", coverage: true))
 )
 
 let uiTestScheme = Scheme(
@@ -60,7 +75,7 @@ let project = Project(name: appName,
                       packages: [
                         .remote(url: "https://github.com/SvenTiigi/EUDCCKit.git", requirement: .upToNextMajor(from: "0.0.3"))
                       ],
-                      targets: [mainTarget, uiTestTarget],
+                      targets: [mainTarget, testTarget, uiTestTarget],
                       schemes: [scheme, uiTestScheme],
                       additionalFiles: ["Configs/Base.xcconfig"])
 
