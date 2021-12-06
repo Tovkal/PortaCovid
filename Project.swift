@@ -19,8 +19,16 @@ let mainTarget = Target(
         .package(product: "EUDCCDecoder")
     ],
     settings: Settings.settings(configurations: [
-        .debug(name: "Debug", xcconfig: "Configs/Debug.xcconfig"),
-        .release(name: "Release", xcconfig: "Configs/Release.xcconfig")
+        .debug(
+            name: "Debug",
+            settings: ["CODE_SIGN_IDENTITY": "$(CODE_SIGN_IDENTITY)"],
+            xcconfig: "Configs/Debug.xcconfig"
+        ),
+        .release(
+            name: "Release",
+            settings: ["CODE_SIGN_IDENTITY": "$(CODE_SIGN_IDENTITY)"],
+            xcconfig: "Configs/Release.xcconfig"
+        )
     ])
 )
 
