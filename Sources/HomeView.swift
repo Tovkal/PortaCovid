@@ -13,6 +13,10 @@ struct HomeView: View {
     @State var certificate: EUDCC?
     @State private var isShowingSettings = false
 
+    init() {
+        _certificate = State(initialValue: DataStore.shared.getCertificate())
+    }
+
     var body: some View {
         NavigationView {
             ZStack {

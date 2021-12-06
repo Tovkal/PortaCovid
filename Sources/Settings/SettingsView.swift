@@ -23,6 +23,7 @@ struct SettingsView: View {
                 if certificate != nil {
                     SettingsRowView(title: "settings.row.delete_certificate", type: .destructive) {
                         certificate = nil
+                        DataStore.shared.deleteCertificate()
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
