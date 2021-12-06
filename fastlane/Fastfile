@@ -39,14 +39,15 @@ end
 
 lane :screenshots do
     capture_screenshots
-    frameit(path: "./fastlane/screenshots")
+    #frameit(path: "./fastlane/screenshots")
 end
 
 desc "Upload text metadata and screenshots"
 lane :upload_all_metadata do
     sh("rm -rf storeScreenshots")
     sh("mkdir storeScreenshots")
-    sh('rsync -av --filter="+ */" --filter="-! *framed*" screenshots/ storeScreenshots/')
+    # sh('rsync -av --filter="+ */" --filter="-! *framed*" screenshots/ storeScreenshots/')
+    sh('rsync -av --filter="+ */" --filter="-! *" screenshots/ storeScreenshots/')
     sh("mv storeScreenshots/ca-ES storeScreenshots/ca")
     upload_to_app_store(
         skip_binary_upload: true,
