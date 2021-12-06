@@ -11,22 +11,40 @@ import EUDCC
 struct HomeView: View {
 
     @State var certificate: EUDCC?
+    @State private var isShowingSettings = false
 
     var body: some View {
-        ZStack {
-            Color.backgroundBlue.ignoresSafeArea()
+        NavigationView {
             ZStack {
-                if let certificate = self.$certificate.wrappedValue {
-                    QRView(certificate: certificate)
-                } else {
-                    NoQRView(certificate: $certificate)
+                Color.backgroundBlue.ignoresSafeArea()
+                ZStack {
+                    if let certificate = self.$certificate.wrappedValue {
+                        QRView(certificate: certificate)
+                    } else {
+                        NoQRView(certificate: $certificate)
+                    }
+                }
+                .frame(maxWidth: UIScreen.main.bounds.width - 80, minHeight: 400, alignment: .center)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(15)
+                .accentColor(.backgroundBlue)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        isShowingSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                    .sheet(isPresented: $isShowingSettings, onDismiss: {
+                        isShowingSettings = false
+                    }, content: {
+                        SettingsView(certificate: $certificate)
+                    })
+                    .accentColor(.white)
                 }
             }
-            .frame(maxWidth: UIScreen.main.bounds.width - 80, minHeight: 400, alignment: .center)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(15)
-            .accentColor(.backgroundBlue)
         }
     }
 }
