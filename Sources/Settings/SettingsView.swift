@@ -28,6 +28,19 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("settings.title".localized)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.gray)
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color.red)
+                            .clipShape(Circle())
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showSendFeedback) {
             showSendFeedback = false
