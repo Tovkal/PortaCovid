@@ -3,9 +3,9 @@ default_platform(:ios)
 desc "Description of what the lane does"
 lane :test do
     tests_passed = scan(
-                        project: "Makeup.xcodeproj",
-                        devices: ["iPhone 12"], 
-                        scheme: "Makeup",
+                        project: "PortaCovid.xcodeproj",
+                        devices: ["iPhone 13"], 
+                        scheme: "PortaCovid",
                         fail_build: false
                     )
 
@@ -26,14 +26,14 @@ lane :beta do |options|
     if ["patch", "minor", "major"].include? bump_type
         increment_version_number_in_plist(
             bump_type: bump_type,
-            scheme: "Makeup"
+            scheme: "PortaCovid"
         )
     end
-    increment_build_number_in_plist(scheme: "Makeup")
+    increment_build_number_in_plist(scheme: "PortaCovid")
 
     test
     commit_tag_version_bump
-    build_app(scheme: "Makeup")
+    build_app(scheme: "PortaCovid")
     upload_to_testflight(username: "tovkal@gmail.com", skip_waiting_for_build_processing: true)
 end
 
@@ -64,8 +64,8 @@ lane :upload_text_metadata do
 end
 
 lane :commit_tag_version_bump do
-    version = get_version_number_from_plist(scheme: "Makeup")
-    build = get_build_number_from_plist(scheme: "Makeup")
+    version = get_version_number_from_plist(scheme: "PortaCovid")
+    build = get_build_number_from_plist(scheme: "PortaCovid")
     git_commit(path: ["Sources/Info.plist"], message: "Version Bump #{version}(#{build})")
     add_git_tag(
         tag: "#{version}",
