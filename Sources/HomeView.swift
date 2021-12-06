@@ -13,10 +13,10 @@ struct HomeView: View {
     @State var certificate: EUDCC?
 
     var body: some View {
-        if certificate == nil {
-            NoQRView(certificate: $certificate)
+        if let certificate = self.$certificate.wrappedValue {
+            QRView(certificate: certificate)
         } else {
-            QRView()
+            NoQRView(certificate: $certificate)
         }
     }
 }
