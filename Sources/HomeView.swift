@@ -24,12 +24,12 @@ struct HomeView: View {
                         NoQRView(certificate: $certificate)
                     }
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width - 80, minHeight: 400, alignment: .center)
-                .padding()
+                .frame(maxWidth: UIScreen.main.bounds.width - 60, minHeight: 400, alignment: .center)
                 .background(Color.white)
                 .cornerRadius(15)
                 .accentColor(.backgroundBlue)
             }
+            .ignoresSafeArea()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
