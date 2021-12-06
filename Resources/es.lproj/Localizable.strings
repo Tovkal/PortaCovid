@@ -1,0 +1,15 @@
+/* 
+  Localizables.strings
+  PortaCovid
+
+  Created by Andrés Pizá Bückmann on 6/12/21.
+  
+*/
+
+"settings.title" = "Ajustes";
+"settings.row.feedback" = "Enviar feedback";
+"settings.row.delete_certificate" = "Borrar certificate";
+
+"no_qr.text.add_certificate" = "Añade un certificate";
+"no_qr.buttons.scan_qr" = "Escanea un código QR";
+"qr.title" = "CERTIFICADO COVID";

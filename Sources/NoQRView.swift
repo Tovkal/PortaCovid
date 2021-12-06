@@ -15,10 +15,10 @@ struct NoQRView: View {
 
     var body: some View {
         VStack {
-            Text("Add a certificate")
+            Text("no_qr.text.add_certificate".localized)
                 .font(.title)
                 .padding()
-            Button("\(Image(systemName: "qrcode.viewfinder")) Scan a QR code") {
+            Button("\(Image(systemName: "qrcode.viewfinder")) \("no_qr.buttons.scan_qr".localized)") {
                 isShowingScanner = true
             }
             .font(.title2)

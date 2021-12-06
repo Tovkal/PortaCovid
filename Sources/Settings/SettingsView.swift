@@ -17,17 +17,17 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                SettingsRowView(title: "Send feedback") {
+                SettingsRowView(title: "settings.row.feedback") {
                     showSendFeedback = true
                 }
                 if certificate != nil {
-                    SettingsRowView(title: "Delete certificate", type: .destructive) {
+                    SettingsRowView(title: "settings.row.delete_certificate", type: .destructive) {
                         certificate = nil
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("settings.title".localized)
         }
         .sheet(isPresented: $showSendFeedback) {
             showSendFeedback = false

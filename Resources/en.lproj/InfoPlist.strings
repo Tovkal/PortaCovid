@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  PortaCovid
+
+  Created by Andrés Pizá Bückmann on 6/12/21.
+  
+*/
+
+NSCameraUsageDescription = "We need to scan your QR";

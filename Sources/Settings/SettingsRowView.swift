@@ -27,7 +27,7 @@ struct SettingsRowView: View {
             buttonAction()
         }) {
             HStack(spacing: 15) {
-                Text (title)
+                Text(title.localized)
                     .foregroundColor(textColor)
                 Spacer()
                 Image(systemName: "chevron.right")
