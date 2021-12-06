@@ -15,45 +15,44 @@ Install _fastlane_ using
 or alternatively using `brew install fastlane`
 
 # Available Actions
-## iOS
-### ios test
+### test
 ```
-fastlane ios test
+fastlane test
 ```
 Description of what the lane does
-### ios beta
+### beta
 ```
-fastlane ios beta
+fastlane beta
 ```
 Upload build to TestFlight
-### ios screenshots
+### screenshots
 ```
-fastlane ios screenshots
+fastlane screenshots
 ```
 
-### ios upload_all_metadata
+### upload_all_metadata
 ```
-fastlane ios upload_all_metadata
+fastlane upload_all_metadata
 ```
 Upload text metadata and screenshots
-### ios upload_text_metadata
+### upload_text_metadata
 ```
-fastlane ios upload_text_metadata
+fastlane upload_text_metadata
 ```
 Upload only text metadata
-### ios commit_tag_version_bump
+### commit_tag_version_bump
 ```
-fastlane ios commit_tag_version_bump
+fastlane commit_tag_version_bump
 ```
 
-### ios translate
+### translate
 ```
-fastlane ios translate
+fastlane translate
 ```
 
 
 ----
 
-This README.md is auto-generated and will be re-generated every time [fastlane](https://fastlane.tools) is run.
+This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
 More information about fastlane can be found on [fastlane.tools](https://fastlane.tools).
 The documentation of fastlane can be found on [docs.fastlane.tools](https://docs.fastlane.tools).

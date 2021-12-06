@@ -24,18 +24,44 @@ let mainTarget = Target(
     ])
 )
 
+let uiTestTarget = Target(
+    name: "UITests",
+    platform: platform,
+    product: .uiTests,
+    bundleId: "${CUSTOM_BUNDLE_ID}",
+    infoPlist: .default,
+    sources: ["UITests/**", "fastlane/SnapshotHelper.swift"],
+    dependencies: [
+        .xctest,
+        .target(name: "PortaCovid")
+    ]
+)
+
 let scheme = Scheme(
     name: appName,
     shared: true,
     buildAction: BuildAction(targets: [TargetReference(stringLiteral: appName)])
 )
 
+let uiTestScheme = Scheme(
+    name: "UITests",
+    shared: true,
+    buildAction: BuildAction(
+        targets: [
+            TargetReference(stringLiteral: appName),
+            TargetReference(stringLiteral: "UITests")
+        ]
+    ),
+    testAction: TestAction.targets([TestableTarget("UITests")],
+                                   options: .options(coverage: false))
+)
+
 let project = Project(name: appName,
                       packages: [
                         .remote(url: "https://github.com/SvenTiigi/EUDCCKit.git", requirement: .upToNextMajor(from: "0.0.3"))
                       ],
-                      targets: [mainTarget],
-                      schemes: [scheme],
+                      targets: [mainTarget, uiTestTarget],
+                      schemes: [scheme, uiTestScheme],
                       additionalFiles: ["Configs/Base.xcconfig"])
 
 // MARK: Helper

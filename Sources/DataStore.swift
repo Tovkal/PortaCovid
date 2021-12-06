@@ -34,6 +34,12 @@ class DataStore {
         userDefaults.removeObject(forKey: DataStoreConstants.certificateKey)
     }
 
+    #if DEBUG
+    func preload() {
+        storeCertificate(Constants.sampleQR)
+    }
+    #endif
+
     private func decodeCertificate(_ data: String) -> EUDCC? {
         let decoder = EUDCCDecoder()
         let decodingResult = decoder.decode(from: data)
