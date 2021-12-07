@@ -21,12 +21,14 @@ let mainTarget = Target(
     settings: Settings.settings(configurations: [
         .debug(
             name: "Debug",
-            settings: ["CODE_SIGN_IDENTITY": "$(CODE_SIGN_IDENTITY)"],
+            settings: ["CODE_SIGN_IDENTITY": "$(CODE_SIGN_IDENTITY)",
+                       "TARGETED_DEVICE_FAMILY": "1"],
             xcconfig: "Configs/Debug.xcconfig"
         ),
         .release(
             name: "Release",
-            settings: ["CODE_SIGN_IDENTITY": "$(CODE_SIGN_IDENTITY)"],
+            settings: ["CODE_SIGN_IDENTITY": "$(CODE_SIGN_IDENTITY)",
+                       "TARGETED_DEVICE_FAMILY": "1"],
             xcconfig: "Configs/Release.xcconfig"
         )
     ])
