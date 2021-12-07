@@ -84,6 +84,7 @@ fastlane/screenshots/**/*.png
 fastlane/screenshots/screenshots.html
 fastlane/storeScreenshots
 fastlane/test_output
+fastlane/metadata
 
 # Code Injection
 #
