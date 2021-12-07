@@ -18,14 +18,14 @@ class PortaCovidUITests: XCTestCase {
     }
 
     func testWithQR() throws {
-        app.launchArguments = ["-preloadQR"]
+        app.launchArguments += ["-preloadQR"]
         app.launch()
 
         snapshot("01QR")
     }
 
     func testNoQR() throws {
-        app.launchArguments = ["-noQR"]
+        app.launchArguments += ["-noQR"]
         app.launch()
 
         snapshot("02NoQRt")
